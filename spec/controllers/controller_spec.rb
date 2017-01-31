@@ -12,7 +12,7 @@ describe ApplicationController do
 
     it 'has login link' do
       get '/'
-      click_link 'login'
+      click_link('login')
       expect(page.current_path).to eq('/login')
     end
 
