@@ -1,5 +1,48 @@
 class UsersController < ApplicationController
   get '/signup' do
-    erb :'/users/signup'
+    if !logged_in?
+      erb :'/users/signup'
+    else
+      redirect to '/ads'
+    end
+  end
+
+  post '/signup' do
+    #If any fields are left blank return to /signup
+    if params[:username] == "" || params[:email] == "" || params[:password] ==""
+      redirect to '/signup'
+    #If user with provided username already exists return to /login
+    elsif User.find_by(:username => params[:username]) != nil
+      redirect to '/login'
+    rspec#Otherwise create new user, and log them in
+    else
+      user = User.create(:username => params[:username], :email => params[:email], :password => params[:password])
+      session[:id] = user.id
+      redirect to '/ads'
+    end
+  end
+
+  get '/login' do
+    if logged_in?
+      redirect to '/ads'
+    else
+      erb :'/users/login'
+    end
+  end
+
+  post '/login' do
+    @user = User.find_by(:username => params[:username])
+    #binding.pry
+    if @user && @user.authenticate(params[:password])
+      session[:id] = @user.id
+      redirect to '/ads'
+    else
+      redirect to '/login'
+    end
+  end
+
+  get '/logout' do
+    session.clear
+    redirect to '/login'
   end
 end

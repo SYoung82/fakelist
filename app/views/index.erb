@@ -1,4 +1,14 @@
 <h1>Welcome to Fakelist</h1>
-<a href="/signup" id='signup'>Sign Up</a>
-<a href="/login" id='login'>Log In</a>
-<a href="/logout" id='logout'>Log Out</a>
+<a href="/signup" title="signup">Sign Up</a>
+<a href="/login" title="login">Log In</a>
+<a href="/logout" title="logout">Log Out</a>
+
+<% if @ads != nil %>
+  <li>
+  <% @ads.all.each do |ad| %>
+    <ul><h3><%= ad.title %></h3>
+      <p><%= ad.content %></p>
+    </ul>
+    <% end %>
+  </li>
+<% end %>

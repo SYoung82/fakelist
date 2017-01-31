@@ -1,2 +1,14 @@
-<h1>users/signup.erb</h1>
-<p>Shows signup page</p>
+<h1>Create New Fakelist User</h1>
+
+<form action="/signup" method="POST">
+  <lable>Username:</label>
+  <input type="text" id="username" name="username">
+  <br></br>
+  <lable>Email:   </label>
+  <input type="text" id="email" name="email">
+  <br></br>
+  <lable>Password:</label>
+  <input type="text" id="password" name="password">
+  <br></br>
+  <input type="submit" value="Create New User">
+</form>
