@@ -20,6 +20,7 @@ class AdsController < ApplicationController
 
   get '/ads/:id' do
     @ad = Ad.find_by_id(params[:id])
+    @user = current_user
     erb :'/ads/show'
   end
 
@@ -30,6 +31,12 @@ class AdsController < ApplicationController
     else
       redirect to "/ads"
     end
+  end
+
+  delete '/ads/:id/delete' do
+    @ad = Ad.find_by_id(params[:id])
+    @ad.destroy
+    redirect to '/ads'
   end
 
   patch '/ads/:id' do
@@ -46,4 +53,5 @@ class AdsController < ApplicationController
     @user.ads << @ad
     redirect to "/ads/#{@ad.id}"
   end
+
 end
