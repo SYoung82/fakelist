@@ -1,2 +1,6 @@
-<h1>ads/new.erb</h1>
-<p>New ad creation form</p>
+<h1>Create New Ad</h1>
+  <form method="POST" action="/ads">
+    <p>Title: <input type="text" name="title" id="title"></p>
+    <p>Content: <input type="text" name="content" id="content"></p>
+    <input type="submit" name="Create" value="Create" id="submit">
+  </form>

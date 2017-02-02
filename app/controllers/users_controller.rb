@@ -24,7 +24,7 @@ class UsersController < ApplicationController
 
   get '/login' do
     if logged_in?
-      redirect to '/ads'
+      redirect to '/'
     else
       erb :'/users/login'
     end
@@ -35,7 +35,7 @@ class UsersController < ApplicationController
     #binding.pry
     if @user && @user.authenticate(params[:password])
       session[:id] = @user.id
-      redirect to '/ads'
+      redirect to '/'
     else
       redirect to '/login'
     end
@@ -45,4 +45,5 @@ class UsersController < ApplicationController
     session.clear
     redirect to '/login'
   end
+
 end

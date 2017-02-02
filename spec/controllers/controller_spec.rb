@@ -166,7 +166,7 @@ describe ApplicationController do
       user = User.create(:username => "Kristen", :email => "kristen@mail.com", :password => "password")
       ad = Ad.create(:title => "Kristen's Ad", :content => "Sweet ad bro.", :user_id => user.id)
       get "/ads/#{ad.id}"
-      click_button("Edit")
+      click_button("edit")
       expect(last_response.location).to include('/edit')
     end
 
@@ -174,7 +174,7 @@ describe ApplicationController do
       user = User.create(:username => "Kristen", :email => "kristen@mail.com", :password => "password")
       ad = Ad.create(:title => "Kristen's Ad", :content => "Sweet ad bro.", :user_id => user.id)
       get "/ads/#{ad.id}"
-      click_button("Delete")
+      click_button("delete")
       expect(User.find_by(:username => "Kristen")).to eq(nil)
       expect(last_response.location).to include('/ads')
     end

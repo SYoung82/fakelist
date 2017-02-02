@@ -1,2 +1,10 @@
-<h1>ads/edit.erb</h1>
-<p>Edit form for a particular ad</p>
+<h1>Edit Ad</h1>
+<form action="/ads/<%= @ad.id %>" method="post">
+  <input id="hidden" type="hidden" name="_method" value="PATCH">
+  <label>Title:</label>
+  <input type="text" name="title" id = "title" value="<%= @ad.title %>">
+  <label>Contents:</label>
+  <input type="text" name="content" id = "content" value="<%= @ad.content %>">
+  <br></br>
+  <input type="submit" value="submit">
+</form>

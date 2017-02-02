@@ -7,6 +7,8 @@ class ApplicationController < Sinatra::Base
   end
 
   get '/' do
+    #binding.pry
+    @ads = Ad.all
     erb :index
   end
 

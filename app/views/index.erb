@@ -1,14 +1,18 @@
-<h1>Welcome to Fakelist</h1>
+<% if logged_in? %>
+  <h1>Welcome to Fakelist, <%= current_user.username %></h1>
+<% else %>
+  <h1>Welcome to Fakelist</h1>
+<% end %>
 <a href="/signup" title="signup">Sign Up</a>
 <a href="/login" title="login">Log In</a>
 <a href="/logout" title="logout">Log Out</a>
+<hr>
 
 <% if @ads != nil %>
-  <li>
   <% @ads.all.each do |ad| %>
-    <ul><h3><%= ad.title %></h3>
-      <p><%= ad.content %></p>
-    </ul>
-    <% end %>
-  </li>
+    <a href="/ads/<%= ad.id %>"><h3><%= ad.title %></h3></a>
+    <p><%= ad.content %></p>
+    <a href="<%= ad.user.email %>"><%= ad.user.email %></a>
+    <hr>
+  <% end %>
 <% end %>
