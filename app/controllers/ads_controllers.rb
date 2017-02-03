@@ -28,7 +28,7 @@ class AdsController < ApplicationController
 
   get '/ads/:id/edit' do
     @ad = Ad.find_by_id(params[:id])
-    if @ad.id = session[:id]
+    if @ad.user_id == session[:id]
       erb :'/ads/edit'
     else
       redirect to "/ads"

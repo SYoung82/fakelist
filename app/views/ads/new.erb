@@ -1,7 +1,9 @@
 <h1>Create New Ad</h1>
   <form method="POST" action="/ads">
-    <p>Title: <input type="text" name="title" id="title"></p>
-    <p>Content: <input type="text" name="content" id="content"></p>
+    <p><label>Title: </label><br>
+      <input type="text" name="title" id="title"></p>
+    <p><label>Content: </label><br>
+      <textarea type="text" name="content" rows="10" cols="30" id="content"></textarea></p>
       <label>Section:</label><br>
     <% Section.all.each do |section| %>
       <input type="radio" name = "section" value="<%= section.id %>"> <%= section.name %><br>

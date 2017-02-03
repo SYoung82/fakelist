@@ -1,10 +1,10 @@
 <h1>Edit Ad</h1>
 <form action="/ads/<%= @ad.id %>" method="post">
   <input id="hidden" type="hidden" name="_method" value="PATCH">
-  <p><label>Title:</label>
+  <p><label>Title:</label><br>
   <input type="text" name="title" id = "title" value="<%= @ad.title %>"></p>
-  <p><label>Contents:</label>
-  <input type="text" name="content" id = "content" value="<%= @ad.content %>"></p>
+  <p><label>Contents:</label><br>
+  <textarea type="text" name="content" rows="10" cols="30" id = "content" ><%= @ad.content %></textarea></p>
 
   <label>Section:</label><br>
   <% Section.all.each do |section| %>

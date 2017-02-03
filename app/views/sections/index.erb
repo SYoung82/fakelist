@@ -1,0 +1,13 @@
+<h2>Section: <%= @section.name %></h2><hr>
+  <% @section.ads.each do |ad| %>
+    <a href="/ads/<%= ad.id %>"><h3><%= ad.title %></h3></a>
+    <p><%= ad.content %></p>
+
+    <% if ad.user == current_user %>
+      <a href="/ads/<%= ad.id %>">Manage Ad</a>
+    <% else %>
+      <a href="mailto:<%= ad.user.email %>">Contact Seller</a>
+    <% end %>
+
+    <hr>
+  <% end %>
