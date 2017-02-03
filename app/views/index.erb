@@ -4,9 +4,9 @@
     <p><%= ad.content %></p>
 
     <% if ad.user == current_user %>
-      <a href="/ads/<%= ad.id %>/edit">Manage Ad</a>
+      <a href="/ads/<%= ad.id %>">Manage Ad</a>
     <% else %>
-      <a href="<%= ad.user.email %>">Contact Seller</a>
+      <a href="mailto:<%= ad.user.email %>">Contact Seller</a>
     <% end %>
 
     <hr>

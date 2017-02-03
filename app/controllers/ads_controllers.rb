@@ -1,3 +1,5 @@
+
+
 class AdsController < ApplicationController
   get '/ads' do
     #If user logged in, find them by id and display ad page
@@ -43,15 +45,22 @@ class AdsController < ApplicationController
     @ad = Ad.find_by_id(params[:id])
     @ad.title = params[:title]
     @ad.content = params[:content]
+    @ad.section_id = params[:section]
     @ad.save
     redirect to "/ads/#{@ad.id}"
   end
 
   post '/ads' do
-    @ad = Ad.create(:title => params[:title], :content => params[:content])
-    @user = current_user
-    @user.ads << @ad
-    redirect to "/ads/#{@ad.id}"
+    if params[:title] && params[:content] && params[:section_id]
+      @ad = Ad.create(:title => params[:title], :content => params[:content], :section_id => params[:section])
+      @user = current_user
+      @user.ads << @ad
+      redirect to "/ads/#{@ad.id}"
+    else
+      ###Error message undefined local variable or method 'flash'
+      #flash[:error] = "Please fill in all fields!"
+      redirect to '/ads/new'
+    end
   end
 
 end

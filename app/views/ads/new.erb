@@ -2,5 +2,9 @@
   <form method="POST" action="/ads">
     <p>Title: <input type="text" name="title" id="title"></p>
     <p>Content: <input type="text" name="content" id="content"></p>
-    <input type="submit" name="Create" value="Create" id="submit">
+      <label>Section:</label><br>
+    <% Section.all.each do |section| %>
+      <input type="radio" name = "section" value="<%= section.id %>"> <%= section.name %><br>
+    <% end %>
+    <br><input type="submit" name="Create" value="Create" id="submit">
   </form>
