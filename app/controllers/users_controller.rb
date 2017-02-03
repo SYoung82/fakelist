@@ -14,9 +14,9 @@ class UsersController < ApplicationController
     #If user with provided username already exists return to /login
     elsif User.find_by(:username => params[:username]) != nil
       redirect to '/login'
-    rspec#Otherwise create new user, and log them in
+    #Otherwise create new user, and log them in, defaulting to non admin
     else
-      user = User.create(:username => params[:username], :email => params[:email], :password => params[:password])
+      user = User.create(:username => params[:username], :email => params[:email], :password => params[:password], :is_admin => false)
       session[:id] = user.id
       redirect to '/ads'
     end

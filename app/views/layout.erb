@@ -3,7 +3,7 @@
   <head>
   </head>
   <body>
-    <header id="gradient">
+    <header id="navbar">
       <% if logged_in? %>
         <h1>Welcome to Fakelist, <%= current_user.username %></h1>
         <a href="/logout" title="logout">Log Out</a>
@@ -40,11 +40,11 @@
     margin-right:auto;
   }
 
-  #gradient {
+  #navbar {
   background: red; /* For browsers that do not support gradients */
   background: -webkit-linear-gradient(left bottom, white, blue); /* For Safari 5.1 to 6.0 */
   background: -o-linear-gradient(top right, white, blue); /* For Opera 11.1 to 12.0 */
   background: -moz-linear-gradient(top right, white, blue); /* For Firefox 3.6 to 15 */
   background: linear-gradient(to top right, white , blue); /* Standard syntax */
-}
+  }
 </style>
