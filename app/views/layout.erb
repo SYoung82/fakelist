@@ -9,6 +9,9 @@
         <a href="/logout" title="logout">Log Out</a>
         <a href="/ads" title="ads">Manage Ads</a>
         <a href="/ads/new" title="new">New Ad</a>
+        <% if current_user.is_admin %>
+          <a href="/admins" title='admins'>Admin Menu</a>
+        <% end %>
       <% else %>
         <h1>Welcome to Fakelist</h1>
         <a href="/signup" title="signup">Sign Up</a>

@@ -1,0 +1,12 @@
+<h2>Existing Ads</h2>
+
+<% @ads.all.each do |ad| %>
+  <h3><%= ad.title %></h3>
+  <h4>Posted By: <%= ad.user.username %></h4>
+  <p><%= ad.content %></p>
+  <form method="post" action="/ads/<%=ad.id%>/delete">
+    <input id="hidden" type="hidden" name="_method" value="DELETE">
+    <input id="delete" type="submit" value="Delete Ad">
+  </form><br>
+  <hr>
+<% end %>

@@ -8,4 +8,5 @@ use Rack::MethodOverride
 use UsersController
 use AdsController
 use SectionsController
+use AdminsController 
 run ApplicationController

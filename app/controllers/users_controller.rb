@@ -46,4 +46,20 @@ class UsersController < ApplicationController
     redirect to '/login'
   end
 
+  delete '/users/:id/delete' do
+    @user = User.find_by_id(params[:id])
+    #Delete all of users ads, then delete user
+    @user.ads.all.each do |ad|
+      ad.destroy
+    end
+    @user.destroy
+    redirect to '/admins/:id/manage_users'
+  end
+
+  get '/users/:id/reset_password' do
+    @user = User.find_by_id(params[:id])
+    @user.password = "password"
+    @user.save
+    redirect to '/admins/manage_users'
+  end
 end

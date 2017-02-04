@@ -1,0 +1,17 @@
+<h2>Existing Users</h2>
+
+<% @users.all.each do |user| %>
+  <% if user.id != current_user.id %>
+    <p><%= user.username %></p>
+    <form method="post" action="/users/<%=user.id%>/delete">
+      <input id="hidden" type="hidden" name="_method" value="DELETE">
+      <input id="delete" type="submit" value="Delete User">
+    </form><br>
+
+    <form method="post" action="/users/<%=user.id%>/reset_password">
+      <input id="hidden" type="hidden" name="_method" value="PATCH">
+      <input id="edit" type="submit" value="Reset Password">
+    </form>
+    <hr>
+  <% end %>
+<% end %>
