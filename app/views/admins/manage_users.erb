@@ -5,12 +5,6 @@
   <% if user.id != current_user.id %>
     <p><%= user.username %></p>
 
-    <!-- Create Delete User button -->
-    <form method="post" action="/users/<%=user.id%>/delete">
-      <input id="hidden" type="hidden" name="_method" value="DELETE">
-      <input id="delete" type="submit" value="Delete User">
-    </form><br>
-
     <!-- Create Reset Password button, resets password to "password" -->
     <form method="post" action="/users/<%=user.id%>/reset_password">
       <input id="hidden" type="hidden" name="_method" value="PATCH">
@@ -21,15 +15,21 @@
       <!-- Create Revoke Admin button, take away user admin rights -->
       <form method="post" action="/users/<%=user.id%>/revoke_admin">
         <input id="hidden" type="hidden" name="_method" value="PATCH">
-        <input id="admin" type="submit" value="Revoke Admin">
-      </form>
+        <input style="background-color:orange" id="admin" type="submit" value="Revoke Admin">
+      </form><br>
     <%else%>
       <!-- Create Make Admin button, give user admin rights -->
       <form method="post" action="/users/<%=user.id%>/make_admin">
         <input id="hidden" type="hidden" name="_method" value="PATCH">
-        <input id="admin" type="submit" value="Make Admin">
-      </form>
+        <input style="background-color:gold" id="admin" type="submit" value="Make Admin">
+      </form><br>
     <%end%>
+
+    <!-- Create Delete User button -->
+    <form method="post" action="/users/<%=user.id%>/delete">
+      <input id="hidden" type="hidden" name="_method" value="DELETE">
+      <input style="background-color:red" id="delete" type="submit" value="Delete User">
+    </form>
     <hr>
   <% end %>
 <% end %>
