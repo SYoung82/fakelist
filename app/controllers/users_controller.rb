@@ -58,10 +58,37 @@ class UsersController < ApplicationController
     redirect to '/admins/manage_users'
   end
 
-  get '/users/:id/reset_password' do
-    @user = User.find_by_id(params[:id])
-    @user.password = "password"
-    @user.save
-    redirect to '/admins/manage_users'
+  patch '/users/:id/reset_password' do
+    #Verify current user has admin privileges to reset password
+    if current_user.is_admin
+      @user = User.find_by_id(params[:id])
+      @user.password = "password"
+      @user.save
+      redirect to '/admins/manage_users'
+    else
+      redirect to '/'
+    end
+  end
+
+  get '/users/change_password' do
+    #Check if user logged in and display change password form, otherwise redirect home
+    if logged_in?
+      erb :'/users/change_password'
+    else
+      redirect to '/'
+    end
+  end
+
+  patch '/users/change_password' do
+    #if the current user's password was input correctly and the new password fields match
+    #update current_user's password
+    if current_user.authenticate(params[:current]) && params[:new] == params[:verify]
+      user = current_user
+      user.password = params[:new]
+      user.save
+      redirect to '/'
+    else
+      redirect to 'users/change_password'
+    end
   end
 end
