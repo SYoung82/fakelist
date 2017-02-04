@@ -4,20 +4,28 @@
   </head>
   <body>
     <header id="navbar">
+
+      <!-- If user logged in render appropriate header -->
       <% if logged_in? %>
         <h1>Welcome to Fakelist, <%= current_user.username %></h1>
         <a href="/logout" title="logout">Log Out</a>
         <a href="/ads" title="ads">Manage Ads</a>
         <a href="/ads/new" title="new">New Ad</a>
+
+        <!-- If logged in user is admin ad appropriate link -->
         <% if current_user.is_admin %>
           <a href="/admins" title='admins'>Admin Menu</a>
         <% end %>
+
+      <!-- Otherwise render header signup/login header -->
       <% else %>
         <h1>Welcome to Fakelist</h1>
         <a href="/signup" title="signup">Sign Up</a>
         <a href="/login" title="login">Log In</a>
       <% end %>
       <a href="/" title="home">Home</a><br></br>
+
+      <!-- Create section navigation drop down box -->
       <label>Or choose a section to browse:</label>
       <form method="post" action="/sections">
         <input list="sections" name="section">

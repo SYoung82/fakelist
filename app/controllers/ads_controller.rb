@@ -13,6 +13,7 @@ class AdsController < ApplicationController
   end
 
   get '/ads/new' do
+    #Verify user is logged in to create an ad
     if logged_in?
       erb :'/ads/new'
     else
@@ -28,6 +29,7 @@ class AdsController < ApplicationController
 
   get '/ads/:id/edit' do
     @ad = Ad.find_by_id(params[:id])
+    #Verify that user owns ad in order to edit it
     if @ad.user_id == session[:id]
       erb :'/ads/edit'
     else
@@ -37,9 +39,11 @@ class AdsController < ApplicationController
 
   delete '/ads/:id/delete' do
     @ad = Ad.find_by_id(params[:id])
+    #Check if user owns ad in order to delete it
     if @ad.user == current_user
       @ad.destroy
       redirect to '/ads'
+    #Or if user is admin can also delete, redirects to different location though
     elsif current_user.is_admin
       @ad.destroy
       redirect to '/admins/manage_ads'
@@ -47,6 +51,7 @@ class AdsController < ApplicationController
   end
 
   patch '/ads/:id' do
+    #Get the add, update all fields and save back to db
     @ad = Ad.find_by_id(params[:id])
     @ad.title = params[:title]
     @ad.content = params[:content]
@@ -56,6 +61,7 @@ class AdsController < ApplicationController
   end
 
   post '/ads' do
+    #Check if all fields are supplied and create add
     if params[:title] && params[:content] && params[:section]
       @ad = Ad.create(:title => params[:title], :content => params[:content], :section_id => params[:section])
       @user = current_user
@@ -68,9 +74,4 @@ class AdsController < ApplicationController
     end
   end
 
-  delete '/ads/:id/delete' do
-    @ad = Ad.find_by_id(params[:id])
-    @ad.destroy
-    redirect to '/admins/manage_ads'
-  end
 end

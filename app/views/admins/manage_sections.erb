@@ -1,9 +1,12 @@
 <h2>Existing Sections</h2>
 
+<!-- Get all sections and list them -->
 <% @sections.all.each do |section| %>
   <p><%= section.name %></p>
 <% end %>
 <hr>
+
+<!-- Create new section form -->
 <h2>Create New Section</h2>
   <form method="POST" action="/sections/new">
     <p><label>Name: </label><br>

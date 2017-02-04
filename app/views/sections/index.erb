@@ -1,8 +1,9 @@
 <h2>Section: <%= @section.name %></h2><hr>
+  <!-- Get each ad in the currently selected section and render its title and content -->
   <% @section.ads.each do |ad| %>
     <a href="/ads/<%= ad.id %>"><h3><%= ad.title %></h3></a>
     <p><%= ad.content %></p>
-
+<!-- if current_user owns ad place the manage ad button, otherwise place contact link -->
     <% if ad.user == current_user %>
       <a href="/ads/<%= ad.id %>">Manage Ad</a>
     <% else %>

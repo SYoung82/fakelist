@@ -1,6 +1,8 @@
+<!-- Render the current ad's title and content -->
 <h3><%= @ad.title %></h3>
 <%= @ad.content %><br></br>
 
+<!-- Check if current user owns ad, if so places delete and edit buttons -->
 <% if current_user == @ad.user %>
   <form method="post" action="/ads/<%=@ad.id%>/delete">
     <input id="hidden" type="hidden" name="_method" value="DELETE">
@@ -12,6 +14,7 @@
     <input id="edit" type="submit" value="Edit Ad">
     </form>
 
+<!-- Else renders a contact seller link -->
 <% else %>
   <a href="<%= @ad.user.email %>">Contact Seller</a>
 <% end %>

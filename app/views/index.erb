@@ -1,8 +1,10 @@
 <% if @ads != nil %>
+  <!-- Get all ads and display them -->
   <% @ads.all.each do |ad| %>
     <a href="/ads/<%= ad.id %>"><h3><%= ad.title %></h3></a>
     <p><%= ad.content %></p>
 
+    <!-- If this ad is the current user's place manage ad button, else place contact link -->
     <% if ad.user == current_user %>
       <a href="/ads/<%= ad.id %>">Manage Ad</a>
     <% else %>

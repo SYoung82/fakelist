@@ -1,5 +1,6 @@
 class UsersController < ApplicationController
   get '/signup' do
+    #If a user is not already logged in render signup page otherwise show home
     if !logged_in?
       erb :'/users/signup'
     else
@@ -23,6 +24,7 @@ class UsersController < ApplicationController
   end
 
   get '/login' do
+    #If already logged in redirect to home otherwise render login page
     if logged_in?
       redirect to '/'
     else
@@ -32,7 +34,7 @@ class UsersController < ApplicationController
 
   post '/login' do
     @user = User.find_by(:username => params[:username])
-    #binding.pry
+    #Authenticate user or redirect to login again
     if @user && @user.authenticate(params[:password])
       session[:id] = @user.id
       redirect to '/'

@@ -1,13 +1,17 @@
 <h2>Existing Users</h2>
 
+<!-- Get all users, except current_user, don't want current user to accidently delete himself -->
 <% @users.all.each do |user| %>
   <% if user.id != current_user.id %>
     <p><%= user.username %></p>
+
+    <!-- Create Delete User button -->
     <form method="post" action="/users/<%=user.id%>/delete">
       <input id="hidden" type="hidden" name="_method" value="DELETE">
       <input id="delete" type="submit" value="Delete User">
     </form><br>
 
+    <!-- Create Reset Password button, resets password to "password" -->
     <form method="post" action="/users/<%=user.id%>/reset_password">
       <input id="hidden" type="hidden" name="_method" value="PATCH">
       <input id="edit" type="submit" value="Reset Password">

@@ -1,4 +1,7 @@
 <h1>Edit Ad</h1>
+
+<!-- Create form with title, and content available sections,
+populate those fields with current values for the ad -->
 <form action="/ads/<%= @ad.id %>" method="post">
   <input id="hidden" type="hidden" name="_method" value="PATCH">
   <p><label>Title:</label><br>
@@ -6,6 +9,7 @@
   <p><label>Contents:</label><br>
   <textarea type="text" name="content" rows="10" cols="30" id = "content" ><%= @ad.content %></textarea></p>
 
+<!-- Render radio button for each available section -->
   <label>Section:</label><br>
   <% Section.all.each do |section| %>
     <% if section == @ad.section %>

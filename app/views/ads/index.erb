@@ -1,6 +1,7 @@
 
 <h2>Your Ads</h2>
 
+<!-- Get current user and render a section for each of his/her ads -->
 <% if @user.ads.all != nil %>
   <% @user.ads.all.each do |ad| %>
     <a href="/ads/<%= ad.id %>"<h3><%= ad.title %></h3></a>

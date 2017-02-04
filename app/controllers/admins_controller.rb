@@ -1,5 +1,6 @@
 class AdminsController < ApplicationController
   get '/admins' do
+    #Check if current user has privileges to access admin page
     if current_user.is_admin
       erb :'/admins/index'
     else
