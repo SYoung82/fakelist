@@ -29,7 +29,7 @@ class AdsController < ApplicationController
 
   get '/ads/:id/edit' do
     @ad = Ad.find_by_id(params[:id])
-    #Verify that user owns ad in order to edit it
+    #Verify that user owns ad in order to edit it and that all the fields were supplied.
     if @ad.user == current_user
       erb :'/ads/edit'
     else
@@ -53,16 +53,17 @@ class AdsController < ApplicationController
   end
 
   patch '/ads/:id' do
-    #Get the add, Verify user owns the ad, update all fields and save back to db
+    #Get the add, Verify user owns the ad and that all fields were supplied, update all fields and save back to db
     @ad = Ad.find_by_id(params[:id])
-    if current_user == @ad.user
+
+    if current_user == @ad.user && !params[:title].empty? && !params[:content].empty? && !params[:section].empty?
       @ad.title = params[:title]
       @ad.content = params[:content]
       @ad.section_id = params[:section]
       @ad.save
       redirect to "/ads/#{@ad.id}"
     else
-      redirect to '/error'
+      redirect to "/ads/#{@ad.id}"
     end
   end
 
