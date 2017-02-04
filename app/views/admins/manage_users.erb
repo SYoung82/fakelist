@@ -15,7 +15,21 @@
     <form method="post" action="/users/<%=user.id%>/reset_password">
       <input id="hidden" type="hidden" name="_method" value="PATCH">
       <input id="edit" type="submit" value="Reset Password">
-    </form>
+    </form><br>
+
+    <%if user.is_admin%>
+      <!-- Create Revoke Admin button, take away user admin rights -->
+      <form method="post" action="/users/<%=user.id%>/revoke_admin">
+        <input id="hidden" type="hidden" name="_method" value="PATCH">
+        <input id="admin" type="submit" value="Revoke Admin">
+      </form>
+    <%else%>
+      <!-- Create Make Admin button, give user admin rights -->
+      <form method="post" action="/users/<%=user.id%>/make_admin">
+        <input id="hidden" type="hidden" name="_method" value="PATCH">
+        <input id="admin" type="submit" value="Make Admin">
+      </form>
+    <%end%>
     <hr>
   <% end %>
 <% end %>

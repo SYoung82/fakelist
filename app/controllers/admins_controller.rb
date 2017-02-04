@@ -9,17 +9,29 @@ class AdminsController < ApplicationController
   end
 
   get '/admins/manage_sections' do
-    @sections = Section.all
-    erb :'/admins/manage_sections'
+    if current_user.is_admin
+      @sections = Section.all
+      erb :'/admins/manage_sections'
+    else
+      redirect to '/'
+    end
   end
 
   get '/admins/manage_users' do
-    @users = User.all
-    erb :'/admins/manage_users'
+    if current_user.is_admin
+      @users = User.all
+      erb :'/admins/manage_users'
+    else
+      redirect to '/'
+    end
   end
 
   get '/admins/manage_ads' do
-    @ads = Ad.all
-    erb :'/admins/manage_ads'
+    if current_user.is_admin
+      @ads = Ad.all
+      erb :'/admins/manage_ads'
+    else
+      redirect to '/'
+    end
   end
 end

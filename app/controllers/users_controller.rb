@@ -91,4 +91,28 @@ class UsersController < ApplicationController
       redirect to 'users/change_password'
     end
   end
+
+  patch '/users/:id/make_admin' do
+    #if current user is admin find user by :id and set is_admin flag to true
+    if current_user.is_admin
+      user = User.find_by_id(params[:id])
+      user.is_admin = true
+      user.save
+      redirect to '/admins/manage_users'
+    else
+      redirect to '/'
+    end
+  end
+
+  patch '/users/:id/revoke_admin' do
+    #if current user is admin find user by :id and set is_admin flag to false
+    if current_user.is_admin
+      user = User.find_by_id(params[:id])
+      user.is_admin = false
+      user.save
+      redirect to '/admins/manage_users'
+    else
+      redirect to '/'
+    end
+  end
 end
