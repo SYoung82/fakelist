@@ -30,10 +30,10 @@ class AdsController < ApplicationController
   get '/ads/:id/edit' do
     @ad = Ad.find_by_id(params[:id])
     #Verify that user owns ad in order to edit it
-    if @ad.user_id == session[:id]
+    if @ad.user == current_user
       erb :'/ads/edit'
     else
-      redirect to "/ads"
+      redirect to "/error"
     end
   end
 
@@ -47,17 +47,23 @@ class AdsController < ApplicationController
     elsif current_user.is_admin
       @ad.destroy
       redirect to '/admins/manage_ads'
+    else
+      redirect to '/error'
     end
   end
 
   patch '/ads/:id' do
-    #Get the add, update all fields and save back to db
+    #Get the add, Verify user owns the ad, update all fields and save back to db
     @ad = Ad.find_by_id(params[:id])
-    @ad.title = params[:title]
-    @ad.content = params[:content]
-    @ad.section_id = params[:section]
-    @ad.save
-    redirect to "/ads/#{@ad.id}"
+    if current_user == @ad.user
+      @ad.title = params[:title]
+      @ad.content = params[:content]
+      @ad.section_id = params[:section]
+      @ad.save
+      redirect to "/ads/#{@ad.id}"
+    else
+      redirect to '/error'
+    end
   end
 
   post '/ads' do
@@ -68,8 +74,6 @@ class AdsController < ApplicationController
       @user.ads << @ad
       redirect to "/ads/#{@ad.id}"
     else
-      ###Error message undefined local variable or method 'flash'
-      #flash[:error] = "Please fill in all fields!"
       redirect to '/ads/new'
     end
   end

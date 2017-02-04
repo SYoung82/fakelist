@@ -5,7 +5,11 @@ class SectionsController < ApplicationController
   end
 
   post '/sections/new' do
-    Section.create(:name => params[:name])
-    redirect to '/admins/manage_sections'
+    if current_user.is_admin
+      Section.create(:name => params[:name])
+      redirect to '/admins/manage_sections'
+    else
+      redirect to '/error'
+    end
   end
 end

@@ -8,21 +8,21 @@
       <!-- If user logged in render appropriate header -->
       <% if logged_in? %>
         <h1>Welcome to Fakelist, <%= current_user.username %></h1>
-        <a href="/logout" title="logout">Log Out</a>
-        <a href="/ads" title="ads">Manage Ads</a>
-        <a href="/ads/new" title="new">New Ad</a>
-        <a href="/users/change_password" title="change_password">Change Password</a>
+        <a href="/logout" title="logout">Log Out</a>&emsp;
+        <a href="/ads" title="ads">Manage Ads</a>&emsp;
+        <a href="/ads/new" title="new">New Ad</a>&emsp;
+        <a href="/users/change_password" title="change_password">Change Password</a>&emsp;
 
         <!-- If logged in user is admin ad appropriate link -->
         <% if current_user.is_admin %>
-          <a href="/admins" title='admins'>Admin Menu</a>
+          <a href="/admins" title='admins'>Admin Menu</a>&emsp;
         <% end %>
 
       <!-- Otherwise render header signup/login header -->
       <% else %>
         <h1>Welcome to Fakelist</h1>
-        <a href="/signup" title="signup">Sign Up</a>
-        <a href="/login" title="login">Log In</a>
+        <a href="/signup" title="signup">Sign Up</a>&emsp;
+        <a href="/login" title="login">Log In</a>&emsp;
       <% end %>
       <a href="/" title="home">Home</a><br></br>
 

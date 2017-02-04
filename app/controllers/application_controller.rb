@@ -6,6 +6,10 @@ class ApplicationController < Sinatra::Base
 		set :session_secret, "super secret password_security"
   end
 
+  get '/error' do
+    erb :error
+  end
+
   get '/' do
     @ads = Ad.all
     erb :index

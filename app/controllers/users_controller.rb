@@ -50,12 +50,16 @@ class UsersController < ApplicationController
 
   delete '/users/:id/delete' do
     @user = User.find_by_id(params[:id])
-    #Delete all of users ads, then delete user
-    @user.ads.all.each do |ad|
-      ad.destroy
+    if current_user.is_admin || current_user = @user
+      #Delete all of users ads, then delete user
+      @user.ads.all.each do |ad|
+        ad.destroy
+      end
+      @user.destroy
+      redirect to '/admins/manage_users'
+    else
+      redirect to '/error'
     end
-    @user.destroy
-    redirect to '/admins/manage_users'
   end
 
   patch '/users/:id/reset_password' do
@@ -66,7 +70,7 @@ class UsersController < ApplicationController
       @user.save
       redirect to '/admins/manage_users'
     else
-      redirect to '/'
+      redirect to '/error'
     end
   end
 
@@ -75,7 +79,7 @@ class UsersController < ApplicationController
     if logged_in?
       erb :'/users/change_password'
     else
-      redirect to '/'
+      redirect to '/error'
     end
   end
 
@@ -100,7 +104,7 @@ class UsersController < ApplicationController
       user.save
       redirect to '/admins/manage_users'
     else
-      redirect to '/'
+      redirect to '/error'
     end
   end
 
@@ -112,7 +116,7 @@ class UsersController < ApplicationController
       user.save
       redirect to '/admins/manage_users'
     else
-      redirect to '/'
+      redirect to '/error'
     end
   end
 end

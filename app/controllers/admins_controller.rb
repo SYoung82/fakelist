@@ -4,7 +4,7 @@ class AdminsController < ApplicationController
     if current_user.is_admin
       erb :'/admins/index'
     else
-      redirect to '/'
+      redirect to '/error'
     end
   end
 
@@ -13,7 +13,7 @@ class AdminsController < ApplicationController
       @sections = Section.all
       erb :'/admins/manage_sections'
     else
-      redirect to '/'
+      redirect to '/error'
     end
   end
 
@@ -22,7 +22,7 @@ class AdminsController < ApplicationController
       @users = User.all
       erb :'/admins/manage_users'
     else
-      redirect to '/'
+      redirect to '/error'
     end
   end
 
@@ -31,7 +31,7 @@ class AdminsController < ApplicationController
       @ads = Ad.all
       erb :'/admins/manage_ads'
     else
-      redirect to '/'
+      redirect to '/error'
     end
   end
 end
