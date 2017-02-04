@@ -53,7 +53,7 @@ class UsersController < ApplicationController
       ad.destroy
     end
     @user.destroy
-    redirect to '/admins/:id/manage_users'
+    redirect to '/admins/manage_users'
   end
 
   get '/users/:id/reset_password' do
