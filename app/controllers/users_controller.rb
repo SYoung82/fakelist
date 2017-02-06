@@ -19,7 +19,7 @@ class UsersController < ApplicationController
     else
       user = User.create(:username => params[:username], :email => params[:email], :password => params[:password], :is_admin => false)
       session[:id] = user.id
-      redirect to '/ads'
+      redirect to '/'
     end
   end
 
@@ -87,9 +87,8 @@ class UsersController < ApplicationController
     #if the current user's password was input correctly and the new password fields match
     #update current_user's password
     if current_user.authenticate(params[:current]) && params[:new] == params[:verify]
-      user = current_user
-      user.password = params[:new]
-      user.save
+      current_user.password = params[:new]
+      current_user.save
       redirect to '/'
     else
       redirect to 'users/change_password'
