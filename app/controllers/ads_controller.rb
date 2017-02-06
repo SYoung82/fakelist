@@ -29,7 +29,7 @@ class AdsController < ApplicationController
 
   get '/ads/:id/edit' do
     @ad = Ad.find_by_id(params[:id])
-    #Verify that user owns ad in order to edit it and that all the fields were supplied.
+    #Verify that user owns ad in order to edit it.
     if @ad.user == current_user
       erb :'/ads/edit'
     else
