@@ -69,7 +69,7 @@ class AdsController < ApplicationController
 
   post '/ads' do
     #Check if all fields are supplied and create add
-    if params[:title] && params[:content] && params[:section]
+    if params[:title] != "" && params[:content] != "" && params[:section]
       @ad = Ad.create(:title => params[:title], :content => params[:content], :section_id => params[:section])
       @user = current_user
       @user.ads << @ad
