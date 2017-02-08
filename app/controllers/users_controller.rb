@@ -50,7 +50,7 @@ class UsersController < ApplicationController
 
   delete '/users/:id/delete' do
     @user = User.find_by_id(params[:id])
-    if current_user.is_admin || current_user = @user
+    if current_user.is_admin || current_user == @user
       #Delete all of users ads, then delete user
       @user.ads.all.each do |ad|
         ad.destroy
@@ -75,7 +75,7 @@ class UsersController < ApplicationController
   end
 
   get '/users/change_password' do
-    #Check if user logged in and display change password form, otherwise redirect home
+    #Check if user logged in and display change password form, otherwise redirect to permission error
     if logged_in?
       erb :'/users/change_password'
     else
