@@ -23,7 +23,6 @@ class AdsController < ApplicationController
 
   get '/ads/:id' do
     @ad = Ad.find_by_id(params[:id])
-    @user = current_user
     erb :'/ads/show'
   end
 

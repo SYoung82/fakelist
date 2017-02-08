@@ -9,17 +9,13 @@ class UsersController < ApplicationController
   end
 
   post '/signup' do
-    #If any fields are left blank return to /signup
-    if params[:username] == "" || params[:email] == "" || params[:password] ==""
-      redirect to '/signup'
-    #If user with provided username already exists return to /login
-    elsif User.find_by(:username => params[:username]) != nil
-      redirect to '/login'
-    #Otherwise create new user, and log them in, defaulting to non admin
-    else
-      user = User.create(:username => params[:username], :email => params[:email], :password => params[:password], :is_admin => false)
-      session[:id] = user.id
+    redirect to '/' if logged_in?
+    @user = User.new(params)
+    if @user.save
       redirect to '/'
+    else
+      flash[:erro]r = @user.errors.full_messages
+      redirect to '/signup'
     end
   end
 
